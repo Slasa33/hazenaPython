@@ -19,8 +19,8 @@ import HazenaIS.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/',HazenaIS.views.hello),
-    path('klub/<int:klub_id>', HazenaIS.views.klub_info),
     path('kluby/',HazenaIS.views.kluby, name='kluby'),
     path('soupiska/<int:klub_id>',HazenaIS.views.soupiska, name='soupiska'),
+    path('zapasy/',HazenaIS.views.zapasy, name='zapasy'),
+    path('zapasydetail/<int:zapasy_id>',HazenaIS.views.zapasydetail, name='zapasydetail'),
 ]
