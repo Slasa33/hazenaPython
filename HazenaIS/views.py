@@ -75,11 +75,11 @@ def tabulka(request):
     t = Vysledky.objects.all()
     return render(request, 'tabulka.html', {'tabulka':t})
 
-def rozhodci(request):
-    r = Hrac.objects.filter(aktivni=False)
-    return render(request, 'rozhodci.html', {'rozhodci':r})
+def hraci(request):
+    h = Hrac.objects.filter(aktivni=False)
+    return render(request, 'hraci.html', {'hraci':h})
 
-def rozhodci_add(request):
+def hraci_add(request):
     if request.method == 'POST':
         form = KarieraForm(request.POST)
         if form.is_valid():
@@ -90,3 +90,15 @@ def rozhodci_add(request):
         form = KarieraForm()
         form.fields["hrac"].queryset = Hrac.objects.filter(aktivni = False)
     return render(request, 'rozhodci_add.html', {'form':form})
+
+def kariera(request):
+    if request.method == 'POST':
+        form = KarieraForm(request.POST)
+        if form.is_valid():
+            hracid = form.cleaned_data['hrac']
+            Hrac.objects.filter(id = hracid.id).update(aktivni = True)
+            form.save()
+    else:
+        form = KarieraForm()
+        form.fields["hrac"].queryset = Hrac.objects.filter(aktivni = False)
+    return render(request, 'kariera.html', {'form':form})
