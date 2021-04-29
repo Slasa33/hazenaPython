@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+from datetime import datetime
 
 # Create your models here.
 
@@ -88,7 +88,7 @@ class ZapisZapasu(models.Model):
         return f"{self.cas}, {self.zapasy}, {self.hrac}, {self.udalost}"
 
 class Kariera(models.Model):
-    datum_vstupu = models.DateTimeField()
+    datum_vstupu = models.DateTimeField(default=datetime.now)
     aktivni = models.BooleanField()
     hrac = models.ForeignKey('Hrac', on_delete=models.RESTRICT)
     klub = models.ForeignKey('Klub', on_delete=models.RESTRICT)

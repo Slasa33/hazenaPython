@@ -1,0 +1,58 @@
+body{
+    background-color: #f9f9f9;
+}
+.content-info {
+    padding: 40px 0;
+    background-size: cover !important;
+    background-position: top center !important;
+    background-repeat: no-repeat !important;
+    position: relative;
+    padding-bottom: 100px
+}
+
+table {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #dedede
+}
+
+table thead tr th {
+    padding: 35px;
+    border: 1px solid #dedede;
+    color: #000
+}
+
+table.table-striped tbody tr:nth-of-type(odd) {
+    background: #f9f9f9
+}
+
+table.result-point tr td.number {
+    width: 100px;
+    position: relative
+}
+
+.text-left {
+    text-align: center;
+    width: 200px;
+}
+
+table tr td {
+    padding: 10px 20px;
+    border: 1px solid #dedede;
+    width: auto;
+}
+
+table.result-point tr td .fa.fa-caret-up {
+    color: green
+}
+
+table.result-point tr td .fa {
+    font-size: 20px;
+    position: absolute;
+    right: 20px
+}
+
+table tr td {
+    padding: 25px;
+    border: 1px solid #dedede
+}

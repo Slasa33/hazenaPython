@@ -1,0 +1,81 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/tabulka.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}"/>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <title>Edit</title>
+    </head>
+    <body>
+
+
+
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                        Házena
+                </li>
+                <li>
+                    <a href="{% url 'zapasy' %}">Zápasy</a>
+                </li>
+                <li>
+                    <a href="{% url 'kluby' %}">Kluby</a>
+                </li>
+                <li>
+                    <a href="{% url 'tabulka' %}">Tabulka</a>
+                </li>
+                <li>
+                    <a href="">Rozhodčí</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="page-content-wrapper">
+      <section class="content-info">
+        <div class="container paddings-mini">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table-striped table-responsive table-hover result-point">
+                        <thead class="point-table-head">
+                            <tr>
+                                <th class="text-center">Pořadí</th>
+                                <th class="text-left">Klub</th>
+                                <th class="text-center">Výhry</th>
+                                <th class="text-center">Remízy</th>
+                                <th class="text-center">Prohry</th>
+                                <th class="text-center">Skóre</th>
+                                <th class="text-center">Body</th>
+                                <th class="text-center">Liga</th>
+                                <th class="text-center">Sezóna</th>
+                 
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            {% for t in tabulka %}
+                            <tr>
+                                <td>{{t.id}}</td>
+                                <td class="text-left">{{t.klub}} </td>
+                                <td>{{t.vyhry}}</td>
+                                <td>{{t.remizy}}</td>
+                                <td>{{t.prohry}}</td>
+                                <td>{{t.vstrelene_branky}} : {{t.utrzene_branky}}</td>
+    
+                                <td>{{t.body}}</td>
+                                <td>{{t.sezona.nazev_ligy}}</td>
+                                <td>{{t.sezona.nazev_sezony}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+    </body>
+</html> 

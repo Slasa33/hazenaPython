@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from HazenaIS.models import Hrac, Zapasy, ZapisZapasu, Udalost, Rozhodci, Klub, Vysledky, Kariera, Sezona
 from django.db import connection
-from HazenaIS.forms import ZapasSearchForm, HracForm, KlubForm, ZapasyForm
+from HazenaIS.forms import ZapasSearchForm, HracForm, KlubForm, ZapasyForm, KarieraForm
 from django.db.models import Q
 from django.http import HttpResponseRedirect
+from datetime import datetime
 
 def kluby(request):
     k = Klub.objects.filter()
@@ -73,3 +74,19 @@ def zapasy_add(request):
 def tabulka(request):
     t = Vysledky.objects.all()
     return render(request, 'tabulka.html', {'tabulka':t})
+
+def rozhodci(request):
+    r = Hrac.objects.filter(aktivni=False)
+    return render(request, 'rozhodci.html', {'rozhodci':r})
+
+def rozhodci_add(request):
+    if request.method == 'POST':
+        form = KarieraForm(request.POST)
+        if form.is_valid():
+            hracid = form.cleaned_data['hrac']
+            Hrac.objects.filter(id = hracid.id).update(aktivni = True)
+            form.save()
+    else:
+        form = KarieraForm()
+        form.fields["hrac"].queryset = Hrac.objects.filter(aktivni = False)
+    return render(request, 'rozhodci_add.html', {'form':form})

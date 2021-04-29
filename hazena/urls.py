@@ -27,4 +27,6 @@ urlpatterns = [
     path('kluby/add',HazenaIS.views.klub_add, name='klub_add'),
     path('zapasy/add',HazenaIS.views.zapasy_add, name='zapasy_add'),
     path('tabulka/',HazenaIS.views.tabulka, name='tabulka'),
+    path('rozhodci/',HazenaIS.views.rozhodci, name='rozhodci'),
+    path('rozhodci/add',HazenaIS.views.rozhodci_add, name='rozhodci_add'),
 ]

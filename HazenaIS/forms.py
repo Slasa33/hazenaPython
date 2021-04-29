@@ -1,5 +1,5 @@
 from django import forms
-from HazenaIS.models import Hrac, Klub, Zapasy
+from HazenaIS.models import Hrac, Klub, Zapasy, Kariera
 
 class ZapasSearchForm(forms.Form):
     searched_name = forms.CharField(max_length=50, label='Klub')
@@ -17,4 +17,10 @@ class KlubForm(forms.ModelForm):
 class ZapasyForm(forms.ModelForm):
     class Meta:
         model = Zapasy
+        exclude = []
+
+
+class KarieraForm(forms.ModelForm):
+    class Meta:
+        model = Kariera
         exclude = []
