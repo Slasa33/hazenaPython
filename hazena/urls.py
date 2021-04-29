@@ -23,4 +23,8 @@ urlpatterns = [
     path('soupiska/<int:klub_id>',HazenaIS.views.soupiska, name='soupiska'),
     path('zapasy/',HazenaIS.views.zapasy, name='zapasy'),
     path('zapasydetail/<int:zapasy_id>',HazenaIS.views.zapasydetail, name='zapasydetail'),
+    path('soupiska/<int:hrac_id>/edit',HazenaIS.views.hrac_edit, name='hrac_edit'),
+    path('kluby/add',HazenaIS.views.klub_add, name='klub_add'),
+    path('zapasy/add',HazenaIS.views.zapasy_add, name='zapasy_add'),
+    path('tabulka/',HazenaIS.views.tabulka, name='tabulka'),
 ]

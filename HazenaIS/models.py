@@ -56,6 +56,15 @@ class Zapasy(models.Model):
     def __str__(self):
         return f"{self.domaci_skore}, {self.hoste_Skore}, {self.datum_cas}, {self.rozhodci}, {self.domaci}, {self.hoste}"
 
+    def winner(self):
+        if self.domaci_skore > self.hoste_Skore:
+            return "GREEN"
+        elif self.domaci_skore == self.hoste_Skore:
+            return "BLACK"
+        else:
+            return "RED"
+
+
 class Vysledky(models.Model):
     body = models.IntegerField()
     vyhry = models.IntegerField()

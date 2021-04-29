@@ -1,19 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from HazenaIS.models import Hrac, Zapasy, ZapisZapasu, Udalost, Rozhodci, Klub, Vysledky, Kariera, Sezona
 from django.db import connection
+from HazenaIS.forms import ZapasSearchForm, HracForm, KlubForm, ZapasyForm
+from django.db.models import Q
+from django.http import HttpResponseRedirect
 
 def kluby(request):
     k = Klub.objects.filter()
     return render(request, 'kluby.html', {'kluby':k})
 
 def soupiska(request, klub_id):
-    k = Kariera.objects.filter(klub=klub_id)
+    k = Kariera.objects.filter(klub=klub_id, aktivni=True)
     return render(request, 'hraci_soupiska.html', {'hraci':k})
 
 def zapasy(request):
-    z = Zapasy.objects.filter()
-    return render(request, 'zapasy.html', {'zapasy':z})
+    if request.method == 'POST':
+        form = ZapasSearchForm(request.POST)
+        if form.is_valid():
+            searched = form.cleaned_data['searched_name']
+            z = Zapasy.objects.filter(Q(domaci__nazev_klubu__contains=searched) | Q(hoste__nazev_klubu__contains=searched))
+        else:
+            z = Zapasy.objects.all()
+    else:
+        form = ZapasSearchForm()
+        z = Zapasy.objects.all()
+    return render(request, 'zapasy.html', {'zapasy':z, 'form':form})
 
 
 def zapasydetail(request, zapasy_id):
@@ -22,3 +34,42 @@ def zapasydetail(request, zapasy_id):
     hostehraci = Kariera.objects.filter(klub=zdetail.hoste) 
     sezon = Kariera.objects.filter(klub=zdetail.domaci).first()
     return render(request, 'zapasy_detail.html', {'zapasydetail':zdetail, 'domaci':domacihraci, 'hoste':hostehraci, 'sezona':sezon})
+
+def hrac_edit(request, hrac_id):
+    try:
+        h = Hrac.objects.get(id = hrac_id)
+    except Hrac.DoesNotExist:
+        raise Http404("Hrac nenalezen")
+    if request.method == 'POST':
+        form = HracForm(request.POST, instance = h)
+        if form.is_valid():
+            form.save()
+            return redirect('kluby')
+    else:
+        form = HracForm(instance = h)
+    return render(request, 'hrac_edit.html', {'form':form})
+
+
+def klub_add(request):
+    if request.method == 'POST':
+        form = KlubForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('kluby')
+    else:
+        form = KlubForm()
+    return render(request, 'kluby_add.html', {'form':form})
+
+def zapasy_add(request):
+    if request.method == 'POST':
+        form = ZapasyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('zapasy')
+    else:
+        form = ZapasyForm()
+    return render(request, 'zapasy_add.html', {'form':form})
+
+def tabulka(request):
+    t = Vysledky.objects.all()
+    return render(request, 'tabulka.html', {'tabulka':t})
