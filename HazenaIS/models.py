@@ -8,7 +8,7 @@ class Hrac(models.Model):
     prijmeni = models.CharField(max_length=50)
     rodne_cislo = models.CharField(max_length=25)
     nazev_postu = models.CharField(max_length=25)
-    aktivni = models.BooleanField()
+    aktivni = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.jmeno}, {self.prijmeni}, {self.rodne_cislo}, {self.nazev_postu}, {self.aktivni}"

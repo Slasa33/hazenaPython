@@ -24,3 +24,11 @@ class KarieraForm(forms.ModelForm):
     class Meta:
         model = Kariera
         exclude = []
+
+class HracAddForm(forms.ModelForm):
+    class Meta:
+        model = Hrac
+        exclude = ['aktivni']
+
+class HracSearchForm(forms.Form):
+    searched_hrac = forms.CharField(max_length=50, label='Hrac')

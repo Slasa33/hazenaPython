@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from HazenaIS.models import Hrac, Zapasy, ZapisZapasu, Udalost, Rozhodci, Klub, Vysledky, Kariera, Sezona
 from django.db import connection
-from HazenaIS.forms import ZapasSearchForm, HracForm, KlubForm, ZapasyForm, KarieraForm
+from HazenaIS.forms import ZapasSearchForm, HracForm, KlubForm, ZapasyForm, KarieraForm, HracAddForm, HracSearchForm
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from datetime import datetime
@@ -76,20 +76,28 @@ def tabulka(request):
     return render(request, 'tabulka.html', {'tabulka':t})
 
 def hraci(request):
-    h = Hrac.objects.filter(aktivni=False)
-    return render(request, 'hraci.html', {'hraci':h})
+    if request.method == 'POST':
+        form = HracSearchForm(request.POST)
+        if form.is_valid():
+            searched = form.cleaned_data['searched_hrac']
+            h = Hrac.objects.filter(nazev_postu = searched, aktivni=False)
+        else:
+            h = Hrac.objects.all()
+    else:
+        form = HracSearchForm()
+        h = Hrac.objects.filter(aktivni=False)
+
+    return render(request, 'hraci.html', {'hraci':h, 'form':form})
 
 def hraci_add(request):
     if request.method == 'POST':
-        form = KarieraForm(request.POST)
+        form = HracAddForm(request.POST)
         if form.is_valid():
-            hracid = form.cleaned_data['hrac']
-            Hrac.objects.filter(id = hracid.id).update(aktivni = True)
             form.save()
+            return redirect('hraci')
     else:
-        form = KarieraForm()
-        form.fields["hrac"].queryset = Hrac.objects.filter(aktivni = False)
-    return render(request, 'rozhodci_add.html', {'form':form})
+        form = HracAddForm()
+    return render(request, 'hraci_add.html', {'form':form})
 
 def kariera(request):
     if request.method == 'POST':
@@ -98,7 +106,12 @@ def kariera(request):
             hracid = form.cleaned_data['hrac']
             Hrac.objects.filter(id = hracid.id).update(aktivni = True)
             form.save()
+            return redirect('hraci')
     else:
         form = KarieraForm()
         form.fields["hrac"].queryset = Hrac.objects.filter(aktivni = False)
     return render(request, 'kariera.html', {'form':form})
+
+def rozhodci(request):
+    r = Rozhodci.objects.all()
+    return render(request, 'rozhodci.html', {'rozhodci':r})

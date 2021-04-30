@@ -13,7 +13,7 @@
 <body>
     <nav class="fixed-menu">
         <ul>
-          <li><a href="{% url 'kariera' %}">Kariéra</a></li>
+          <li><a href="{% url 'hraci_add' %}">Registrovat hráče</a></li>
         </ul>
       </nav>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -35,10 +35,25 @@
             <li>
                 <a href="{% url 'hraci' %}">Hráči</a>
             </li>
+            <li>
+                <a href="{% url 'rozhodci' %}">Rozhodčí</a>
+            </li>
         </ul>
     </div>
     <div id="page-content-wrapper">
-
+        <div class="member-entry"> 
+            <div class="member-details"> 
+           <div style="text-align:center;">
+           
+            <form action="{% url 'hraci' %}" method="post">
+           {% csrf_token %}
+           Post:
+           {{form.searched_hrac}}
+           <input type="submit" value="Vyhledat" style="width: 10%;margin-left: 40px;">
+            </form>
+    </div> 
+            </div> 
+        </div>
         {% for h in hraci %}
         <div class="member-entry"> 
             <a href="#" class="member-img"> 
@@ -54,7 +69,7 @@
                         {{h.rodne_cislo}}
                     </div> 
                     <div class="col-sm-4">
-                        <a href="{% url 'kariera' %}" button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-edit"></i></a>
+                        <a href="{% url 'kariera' %}" button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"></i>Kariéra</a>
                     </div> 
                     <div class="clear"></div> 
                     <div class="col-sm-4"> 

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/kariera.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/hraci_add.css' %}"/>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -20,35 +20,32 @@
           <div class="container register-form">
             <div class="form">
                 <div class="note">
-                    <p>Kariéra hráče</p>
+                    <p>Registrace hráče</p>
                 </div>
 
-                <form action="{% url 'kariera' %}" method="POST">
+                <form action="{% url 'hraci_add' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-content">
                     <div class="row">
                         
                         <div class="col-md-6">
                             <div class="form-group">
-                                Klub:<br>
-                                {{form.klub}}
+                                Jméno:<br>
+                                {{form.jmeno}}
                             </div>
                             <div class="form-group">
-                                Liga: <br>
-                                {{form.sezona}}
+                                Post:<br>
+                                {{form.nazev_postu}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                Datum:<br>
-                                {{form.datum_vstupu}}
+                                Příjmení:<br>
+                                {{form.prijmeni}}
                             </div>
-        
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
-                                Hráč:<br>
-                                {{form.hrac}}
+                                Rodné číslo: <br>
+                                {{form.rodne_cislo}}
                             </div>
                         </div>
                     </div>

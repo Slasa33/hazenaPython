@@ -30,4 +30,5 @@ urlpatterns = [
     path('hraci/',HazenaIS.views.hraci, name='hraci'),
     path('hraci/add',HazenaIS.views.hraci_add, name='hraci_add'),
     path('kariera/',HazenaIS.views.kariera, name='kariera'),
+    path('rozhodci/',HazenaIS.views.rozhodci, name='rozhodci'),
 ]

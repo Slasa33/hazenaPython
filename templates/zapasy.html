@@ -29,6 +29,9 @@
                 <li>
                     <a href="{% url 'hraci' %}">Hráči</a>
                 </li>
+                <li>
+                    <a href="{% url 'rozhodci' %}">Rozhodčí</a>
+                </li>
             </ul>
         </div>
 <div id="page-content-wrapper">
@@ -40,10 +43,12 @@
                     <h4>Zápasy <a href="{% url 'zapasy_add' %}" button type="button"><i class="fa fa-plus"></i></a></h5></h4>
                     
                 </div>
+
+                <div style="text-align:center;">
                 <form action="{% url 'zapasy' %}" method="post">
                {% csrf_token %}
                {{form.as_p}}
-               <input type="submit" value="Vyhledat" style="width: 10%;margin-left: 50px">
+               <input type="submit" value="Vyhledat" style="width: 10%;margin-left: 40px;">
                 </form>
                 
                 <!-- display: flex; -->
