@@ -8,7 +8,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/hraci.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}"/>
-        <title>Kluby</title>
+        <title>Hraci</title>
     </head>
 <body>
     <nav class="fixed-menu">
@@ -33,7 +33,7 @@
                 <a href="{% url 'tabulka' %}">Tabulky</a>
             </li>
             <li>
-                <a href="{% url 'hraci' %}">Hráči</a>
+                Hráči
             </li>
             <li>
                 <a href="{% url 'rozhodci' %}">Rozhodčí</a>
@@ -57,7 +57,7 @@
         {% for h in hraci %}
         <div class="member-entry"> 
             <a href="#" class="member-img"> 
-                <img src="https://i.imgur.com/xRy8HCt.png" class="img-rounded"> 
+                <img src="{% static 'img/profile.png' %}" class="img-rounded"> 
             <div class="member-details"> 
                 <h4><b> <a href="#"></a>{{h.jmeno}} {{h.prijmeni}}</a></b> </h4> 
                 <div class="row info-list"> 
