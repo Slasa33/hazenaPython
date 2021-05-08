@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from HazenaIS.models import Hrac, Zapasy, ZapisZapasu, Udalost, Rozhodci, Klub, Vysledky, Kariera, Sezona
 from django.db import connection
-from HazenaIS.forms import ZapasSearchForm, HracForm, KlubForm, ZapasyForm, KarieraForm, HracAddForm, HracSearchForm
+from HazenaIS.forms import ZapasSearchForm, HracForm, KlubForm, ZapasyForm, KarieraForm, HracAddForm, HracSearchForm, KarieraDeleteForm
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from datetime import datetime
@@ -45,6 +45,7 @@ def hrac_edit(request, hrac_id):
         form = HracForm(request.POST, instance = h)
         if form.is_valid():
             form.save()
+            Hrac.objects.filter(id = hrac_id).update(aktivni = True)
             return redirect('kluby')
     else:
         form = HracForm(instance = h)
@@ -106,6 +107,7 @@ def kariera(request):
             hracid = form.cleaned_data['hrac']
             Hrac.objects.filter(id = hracid.id).update(aktivni = True)
             form.save()
+            Kariera.objects.filter(hrac = hracid.id).update(aktivni = True)
             return redirect('hraci')
     else:
         form = KarieraForm()
@@ -115,3 +117,20 @@ def kariera(request):
 def rozhodci(request):
     r = Rozhodci.objects.all()
     return render(request, 'rozhodci.html', {'rozhodci':r})
+
+
+def end_kariera(request, hrac_id):
+    k = Hrac.objects.get(id = hrac_id)
+    a = Kariera.objects.get(hrac = k.id)
+
+    if request.method == 'POST':
+        form = KarieraDeleteForm(request.POST, instance = a)
+        if form.is_valid():
+            form.save()
+            Kariera.objects.filter(hrac = k.id).delete()
+            Hrac.objects.filter(id = k.id).update(aktivni = False)
+            return redirect('kluby')
+    else:
+        form = KarieraDeleteForm(instance = a)
+
+    return render(request, 'kariera_delete.html', {'form':form, 'hrac':k})

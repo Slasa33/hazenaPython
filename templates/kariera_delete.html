@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/hrac_edit.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/kariera_delete.css' %}"/>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <title>HracEdit</title>
@@ -19,27 +19,13 @@
         <div class="wrapper fadeInDown">
             <div id="formContent">
               <!-- Tabs Titles -->
-        
-          
-              <!-- Login Form -->
-              <form action="{% url 'hrac_edit' form.instance.id %}" method="POST">
+
+              <form action="{% url 'kariera_delete' hrac.id %}" method="POST">
                 <input type="hidden" id="previous_page" name="previous_page" value="/previous/page/url">
                 {% csrf_token %}
-                Jméno:
-                {{form.jmeno}}
-                <br>
-                Příjmení:
-                {{form.prijmeni}}
-                <br>
-                Post:
-                {{form.nazev_postu}}
-                <br>
-                Rodné číslo:
-                {{form.rodne_cislo}}
-                <input type="submit" value="ulozit">
+               {{form.as_p}}
+                <input type="submit" value="smazat">
               </form>
-        
-          
             </div>
           </div>
           

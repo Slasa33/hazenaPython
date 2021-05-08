@@ -31,7 +31,8 @@
                     {{h.hrac.rodne_cislo}}
                 </div> 
                 <div class="col-sm-4">
-                    <a href="{% url 'hrac_edit' h.id %}" button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-edit"></i></a>
+                    <a href="{% url 'hrac_edit' h.hrac.id %}" button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-edit"></i></a>
+                    <a href="{% url 'kariera_delete' h.hrac.id %}" button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-trash"></i></a>
                 </div> 
                 <div class="clear"></div> 
                 <div class="col-sm-4"> 

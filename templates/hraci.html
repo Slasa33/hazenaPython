@@ -16,6 +16,12 @@
           <li><a href="{% url 'hraci_add' %}">Registrovat hráče</a></li>
         </ul>
       </nav>
+      <nav class="fixed-menu" style="margin-top: 30px;">
+        <ul>
+          <li><a href="{% url 'kariera' %}">Kariéra</a></li>
+        </ul>
+      </nav>
+      
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div id="wrapper" class="wrapper-content">
     <div id="sidebar-wrapper">
@@ -69,7 +75,7 @@
                         {{h.rodne_cislo}}
                     </div> 
                     <div class="col-sm-4">
-                        <a href="{% url 'kariera' %}" button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"></i>Kariéra</a>
+                        <!-- <a href="{% url 'kariera' %}" button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"></i>Kariéra</a> -->
                     </div> 
                     <div class="clear"></div> 
                     <div class="col-sm-4"> 

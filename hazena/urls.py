@@ -31,4 +31,5 @@ urlpatterns = [
     path('hraci/add',HazenaIS.views.hraci_add, name='hraci_add'),
     path('kariera/',HazenaIS.views.kariera, name='kariera'),
     path('rozhodci/',HazenaIS.views.rozhodci, name='rozhodci'),
+    path('soupiska/<int:hrac_id>/delete',HazenaIS.views.end_kariera, name='kariera_delete'),
 ]

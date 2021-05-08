@@ -32,3 +32,9 @@ class HracAddForm(forms.ModelForm):
 
 class HracSearchForm(forms.Form):
     searched_hrac = forms.CharField(max_length=50, label='Hrac')
+
+
+class KarieraDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Kariera
+        exclude = []
